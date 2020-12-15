@@ -5,14 +5,14 @@ RUN adduser -D urlshortener
 WORKDIR /home/urlshortener
 RUN apk update && apk add sqlite
 COPY requirements.txt requirements.txt
-RUN python -m venv venv
-RUN venv/bin/pip install -r requirements.txt
-RUN venv/bin/pip install gunicorn
+RUN pip install -r requirements.txt
+RUN pip install gunicorn
 
 
 COPY app app
+
 COPY migrations migrations
-COPY url_shortener.py config.py boot.sh ./
+COPY url_shortener.py config.py boot.sh tests.py ./
 
 RUN chmod a+x boot.sh
 

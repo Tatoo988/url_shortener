@@ -35,7 +35,7 @@ class ShortenUrlModelCase(unittest.TestCase):
             "url": "www.instagram.com",
             "shortcode": "instag"
         }
-        result = self.test_client.post(self.endpoint_url + '/shorten', headers=self.headers,
+        result = self.test_client.post('api/shorten', headers=self.headers,
                                        data=json.dumps(request_data))
         self.assertEqual(result.status_code, 201)
 
@@ -43,7 +43,7 @@ class ShortenUrlModelCase(unittest.TestCase):
         request_data = {
             "url": "www.google.com",
         }
-        result = self.test_client.post(self.endpoint_url + '/shorten', headers=self.headers,
+        result = self.test_client.post('api/shorten', headers=self.headers,
                                        data=json.dumps(request_data))
         self.assertEqual(result.status_code, 201)
 
@@ -56,7 +56,7 @@ class ShortenUrlModelCase(unittest.TestCase):
             "url": "www.google.com",
             "shortcode": shortcode
         }
-        result = self.test_client.post(self.endpoint_url + '/shorten', headers=self.headers,
+        result = self.test_client.post('api/shorten', headers=self.headers,
                                        data=json.dumps(request_data))
         self.assertEqual(result.status_code, 409)
 
@@ -68,7 +68,7 @@ class ShortenUrlModelCase(unittest.TestCase):
             "url": "www.facebook.com",
             "shortcode": "blabla"
         }
-        result = self.test_client.post(self.endpoint_url + '/shorten', headers=self.headers,
+        result = self.test_client.post('api/shorten', headers=self.headers,
                                        data=json.dumps(request_data))
         self.assertEqual(result.status_code, 409)
 
@@ -78,7 +78,7 @@ class ShortenUrlModelCase(unittest.TestCase):
         db.session.add(shorten)
         db.session.commit()
 
-        result = self.test_client.get(self.endpoint_url + '/{}'.format(shortcode))
+        result = self.test_client.get('api/{}'.format(shortcode))
         self.assertEqual(result.status_code, 302)
 
     def test_shorten_url_stats_success(self):
@@ -87,7 +87,7 @@ class ShortenUrlModelCase(unittest.TestCase):
         db.session.add(shorten)
         db.session.commit()
 
-        result = self.test_client.get(self.endpoint_url + '/{}/stats'.format(shortcode))
+        result = self.test_client.get('api/{}/stats'.format(shortcode))
         self.assertEqual(result.status_code, 200)
 
 

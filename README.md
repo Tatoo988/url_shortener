@@ -22,11 +22,17 @@ to build the project.
 
 Then
 
-```docker-compose up```
+```docker-compose up -d```
 
 System will be running on localhost:8000.
 
 First Add some data with POST to the system and then try to navigate via short code.
+
+## Running unit tests
+
+take a look at your running container id via ```docker ps```
+
+then run ```docker exec -it <container-id> python tests.py```
 
 
 ## API Documentation
