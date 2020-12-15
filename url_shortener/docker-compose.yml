@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  web:
+    build: ./
+    volumes:
+      - /home/tato/projects/equinox/test/python-challenge/url_shortener
+    ports:
+      - 8000:5000
+    entrypoint: ./boot.sh
+    env_file:
+      - ./.env
